@@ -2,6 +2,7 @@ create database dbDistribuidoraPrincipal;
 use dbDistribuidoraPrincipal;
 
 
+
 create table tbCliente(
 	IdCli int primary key auto_increment,
     NomeCli varchar(200) not null,
@@ -26,7 +27,7 @@ create table tbClientePJ(
 
 create table tbProduto(
     CodigoBarras numeric(14) primary key,
-    NomeProd varchar(200) not null,
+    Nome varchar(200) not null,
     Valor decimal(5,2) not null,
     Qtd int
 );
@@ -40,6 +41,8 @@ create table tbCompra(
     IdCli int
 );
 
+
+
 create table tbNotaFiscal(
 	NotaFiscal int primary key,
     TotalNota decimal(5,2) not null,
@@ -48,6 +51,7 @@ create table tbNotaFiscal(
 
 create table tbItemCompra(
 	NotaFiscal int,
+    
     CodigoBarras numeric(14),
     ValorItem decimal(5,2) not null,
     Qtd int not null,
@@ -146,7 +150,6 @@ END $$
 
 show tables;
 
-select * from tbcidade;
 Describe tbCidade;
 select * from tbBairro;
 
@@ -200,5 +203,37 @@ call spInsertBairro(1,"Aclimção");
 call spInsertBairro(2,"Capão Redondo");
 call spInsertBairro(3,"Pirituba");
 call spInsertBairro(4,"Liberdade");
+select * from tbBairro;
 
+
+
+
+
+
+
+
+
+Describe tbProduto;
+
+
+
+Delimiter $$
+
+Create Procedure spinsertproduto(CodigoBarras numeric(14), nome varchar(200),Valor decimal(5,2),Qtd int)
+begin
+
+insert into tbproduto(codigobarras, nome, valor, qtd) values(codigobarras, nome, valor, qtd);
+
+end 
+$$
+
+call spInsertproduto(1234567891011,"Rei de Papel Mache", 54.61 , 120);
+call spInsertproduto(1234567891012,"Bolinha de Sabão", 100.45 , 120);
+call spInsertproduto(1234567891013,"Carro Bate Bate", 44.00 , 120);
+call spInsertproduto(1234567891014,"Bola Furada", 10.00 , 120);
+call spInsertproduto(1234567891015,"Maçã Laranja", 99.44 , 120);
+call spInsertproduto(1234567891016,"Boneco do Hitler", 124.00 , 200);
+call spInsertproduto(1234567891017,"Fainha de Suruí", 50.00 , 200);
+call spInsertproduto(1234567891018,"Zelador de Cemitério", 24.50 , 120);
+select * from tbProduto;
 
